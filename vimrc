@@ -36,8 +36,12 @@ set nocompatible
 set tabstop=4
 "默认缩进4个空格大小
 set shiftwidth=4
+"统一缩进为4
+set softtabstop=4
+"不要用空格代替制表符
+set expandtab
 "增量式搜索，在输入要搜索的文字时，vim会实时匹配
-set incsearch
+"set incsearch
 "高亮搜索
 set hlsearch
 

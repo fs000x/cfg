@@ -15,7 +15,8 @@ set -e
 
 export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
 
-BASE=$(basename $0)
+# BASE=$(basename $0)
+BASE=sslocal
 
 SSLOCAL=/usr/local/bin/$BASE
 # This pid file is managed by start-stop-daemon

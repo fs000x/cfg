@@ -5,7 +5,7 @@ else
     let g:iswindows=0
 endif
 
-"设置配色， 在vim中输入:color 桥tab可查看
+"设置配色， 在vim中输入:color 按tab可查看
 if(g:iswindows==0)
 	color peachpuff
 else

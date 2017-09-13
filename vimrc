@@ -73,3 +73,34 @@ set laststatus=2
 ":autocmd FileType python :set foldmethod=syntax "自动折叠
 :autocmd FileType python :set number
 :autocmd FileType python :set smartindent
+
+
+
+"自动添加.c文件头
+autocmd BufNewFile *.c exec ":call SetComment()"
+"加入注释
+func SetComment()
+    call setline(1, "/**")
+    call append(line("."), " * Copyright (C) ".strftime("%Y")." All rights reserved.")
+    call append(line(".")+1, " *")
+    call append(line(".")+2, " * @file ".expand("%:t"))
+    call append(line(".")+3, " * @brief ")
+    call append(line(".")+4, " * @date ".strftime("%Y-%m-%d"))
+    call append(line(".")+5, " *")
+    call append(line(".")+6, " **/")
+endfunc
+
+"自动生成.h文件
+autocmd BufNewFile *.h exec ":call SetHeader()"
+"自动插入.h文件模板
+func SetHeader()
+    call SetComment()
+    call append(line(".")+7, "")
+    call append(line(".")+8, "#ifndef _".toupper(expand("%:t:r"))."_H_")
+    call append(line(".")+9, "#define _".toupper(expand("%:t:r"))."_H_")
+    call append(line(".")+10, "")
+    call append(line(".")+11, "")
+    call append(line(".")+12, "")
+    call append(line(".")+13, "#endif /* _".toupper(expand("%:t:r"))."_H_ */")
+endfunc
+

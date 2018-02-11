@@ -7,53 +7,43 @@ public class test_for {
 
 	static int[][] xx = {a, b, c};
 
-	public void printArray(int[] array) {
-  			for (int i = 0; i < array.length; i++) {
-    			System.out.print(array[i] + " ");
-  		}
-	}
-
-
 	public int[] mergeInt(int[][]arr) {
 		int[] newArr= new int[0];
 		
-		for(int i = 0; i < arr[0].length; )
+		for(int i = 0, j = 0; i < arr[0].length && j < arr[1].length; )
 		{
-			for(int j = 0; j < arr[1].length && j < arr[0].length; )
+			if (arr[0][i] < arr[1][j])
 			{
-				if (arr[0][i] < arr[1][j])
-				{
-					i+=1;
-				}
-				else if (arr[0][i] > arr[1][j])
-				{
-					j+=1;
-				}
-				else // arr[0][i] == arr[1][j]
-				{
-					newArr  = Arrays.copyOf(newArr, newArr.length + 1);
-					newArr[newArr.length - 1] = arr[0][i];
-					i+=1;
-					j+=1;
-				}
+				i+=1;
+			}
+			else if (arr[0][i] > arr[1][j])
+			{
+				j+=1;
+			}
+			else // arr[0][i] == arr[1][j]
+			{
+				newArr  = Arrays.copyOf(newArr, newArr.length + 1);
+				newArr[newArr.length - 1] = arr[0][i];
+				i+=1;
+				j+=1;
 			}
 		}
 		
 		return newArr;
 	}
 
-
-
 	public static void main(String []args) {
-        	test_for  t = new test_for();
+		test_for t = new test_for();
 		int[] ret = xx[0];
 
+		System.out.println("xx array len = " + xx.length);
 		for (int i = 0; i < xx.length - 1; i++)
 		{
+			System.out.println("process array index: " + i);
 			int[][] arry = {ret, xx[i+1]};
 			ret = t.mergeInt(arry);
 		}
 
-		t.printArray(ret);
-    	}
+		System.out.println(Arrays.toString(ret));
+	}
 }

@@ -9,7 +9,7 @@ public class hashMapString {
 	public static HashMap<String, Object> parse(String input){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String s = input;
-		System.out.println(s);
+		//System.out.println(s);
 		
 		for (; s != null && s.length() > 0;)
 		{
@@ -18,17 +18,28 @@ public class hashMapString {
 			int leftI = s.indexOf('[');
 			int rightI = s.indexOf(']');
 			String key = s.substring(0, eqI);
-			System.out.println(key);
-			System.out.println(dotI);
-			System.out.println(leftI);
-			System.out.println(rightI);
-			if (dotI < leftI)
+			//System.out.println(key);
+			//System.out.println(dotI);
+			//System.out.println(leftI);
+			//System.out.println(rightI);
+			if (s.charAt(eqI+1)!='[')
 			{
-				int valEnd =  min(dotI, rightI);
+				int valEnd =  0;
+				if(dotI>0&&rightI>0)
+					valEnd = min(dotI, rightI);
+				else if (dotI>0&&rightI<0)
+					valEnd = dotI;
+				else if (dotI<0&&rightI>0)
+					valEnd = rightI;
+				else
+					valEnd = s.length();
 
 				String val = s.substring(eqI + 1, valEnd);
 				map.put(key, val);
-				s = s.substring(valEnd + 1);
+				if (dotI < 0 && rightI < 0)
+					s = "";
+				else
+					s = s.substring(valEnd + 1);
 			}
 			else // [ .... ,
 			{
@@ -37,15 +48,18 @@ public class hashMapString {
 				map.put(key, parse(s.substring(leftI+1, lastRightI)));
 				s = s.substring(lastRightI + 1);
 			}
-			if (s.charAt(0) == ',')
+			if (s.length() > 0 && s.charAt(0) == ',')
 				s = s.substring(1);
 		}
 		return map;
 	}
 
 	public static void main(String []args) {
-		System.out.println(str);
-		System.out.println(str.trim());
-		parse(str.trim());
+		System.out.println("input string: " + str);
+		//System.out.println(str.trim());
+		HashMap map = parse(str.trim());
+
+		System.out.println();
+		System.out.println("output hashMap: " + map.toString());
 	}
 }

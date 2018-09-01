@@ -26,6 +26,8 @@ set helplang=cn
 syntax on
 "显示行号
 set number
+"显示相对行号
+set relativenumber
 "设置缩进，有三个取值cindent（c风格）、smartindent（智能模式，好像没有那么智能）、autoindent（简单的与上一行保持一致）
 set cindent
 "在Windows版本中vim的退格键模式默认与vi兼容，修改
